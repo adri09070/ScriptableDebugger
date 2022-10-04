@@ -8,10 +8,12 @@ Class {
 }
 
 { #category : #signalling }
-UnhandledExceptionSignalledByADebuggedExecution class >> signalWithException: anException [
+UnhandledExceptionSignalledByADebuggedExecution class >> signalWithException: arg1 [
 
-	self new
-		unhandledException: anException;
+	| tmp2 |
+	tmp2 := self new.
+	tmp2
+		unhandledException: arg1;
 		signal:
 			'An execution debugged by a scriptable debugger signalled an exception that it did not handle itself. You can find this exception is in the #unhandledException instance variable of this object.'
 ]
@@ -23,7 +25,7 @@ UnhandledExceptionSignalledByADebuggedExecution >> unhandledException [
 ]
 
 { #category : #accessing }
-UnhandledExceptionSignalledByADebuggedExecution >> unhandledException: anException [
+UnhandledExceptionSignalledByADebuggedExecution >> unhandledException: arg1 [
 
-	unhandledException := anException
+	unhandledException := arg1
 ]

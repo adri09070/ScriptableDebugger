@@ -22,26 +22,29 @@ VirtualBreakpoint class >> all [
 
 { #category : #actions }
 VirtualBreakpoint class >> clearAll [
+
 	<script>
 	all := nil
 ]
 
 { #category : #'instance creation' }
-VirtualBreakpoint class >> newOnNode: aNode [
-	"Used by ScriptableDebugger. Should be removed in favour of newOnNode:setBy: if the latter stays"
+VirtualBreakpoint class >> newOnNode: arg1 [
 
-	^ self new
-		  node: aNode;
-		  yourself
+	| tmp2 |
+	tmp2 := self new.
+	tmp2 node: arg1.
+	^ tmp2 yourself
 ]
 
 { #category : #'instance creation' }
-VirtualBreakpoint class >> newOnNode: aNode setBy: anObject [
+VirtualBreakpoint class >> newOnNode: arg1 setBy: arg2 [
 
-	| breakPoint |
-	breakPoint := self new node: aNode; setter: anObject.
-	self all add: breakPoint.
-	^ breakPoint
+	| tmp1 tmp3 |
+	tmp3 := self new.
+	tmp3 node: arg1.
+	tmp1 := tmp3 setter: arg2.
+	self all add: tmp1.
+	^ tmp1
 ]
 
 { #category : #accessing }
@@ -52,18 +55,17 @@ VirtualBreakpoint >> breakOnce [
 ]
 
 { #category : #accessing }
-VirtualBreakpoint >> breakOnce: anObject [
+VirtualBreakpoint >> breakOnce: arg1 [
 
-	breakOnce := anObject
+	breakOnce := arg1
 ]
 
 { #category : #hitTest }
-VirtualBreakpoint >> hitTest: aNode [
-	"aNode is assumed to be the current node of the execution. If aNode is equal to the node on which this breakpoint has been set, evaluate all the blocks in whenHit and return true. Otherwise return false."
+VirtualBreakpoint >> hitTest: arg1 [
 
-	self node == aNode ifTrue: [ 
+	self node == arg1 ifTrue: [ 
 		self breakOnce ifTrue: [ self remove ].
-		self whenHit do: [ :block | block value ].
+		self whenHit do: [ :arg2 | arg2 value ].
 		^ true ].
 	^ false
 ]
@@ -75,14 +77,13 @@ VirtualBreakpoint >> node [
 ]
 
 { #category : #accessing }
-VirtualBreakpoint >> node: anObject [
+VirtualBreakpoint >> node: arg1 [
 
-	node := anObject
+	node := arg1
 ]
 
 { #category : #API }
 VirtualBreakpoint >> once [
-	"Configures this breakpoint to remove itself the next time it is hit"
 
 	breakOnce := true
 ]
@@ -100,9 +101,9 @@ VirtualBreakpoint >> setter [
 ]
 
 { #category : #accessing }
-VirtualBreakpoint >> setter: anObject [
+VirtualBreakpoint >> setter: arg1 [
 
-	setter := anObject
+	setter := arg1
 ]
 
 { #category : #accessing }
@@ -113,8 +114,7 @@ VirtualBreakpoint >> whenHit [
 ]
 
 { #category : #API }
-VirtualBreakpoint >> whenHit: aBlock [
-	"Sets aBlock to be evaluated when this breakpoint is hit. If this method is called multiple times, all the blocks provided will be evaluated when this breakpoint is hit."
+VirtualBreakpoint >> whenHit: arg1 [
 
-	self whenHit add: aBlock
+	self whenHit add: arg1
 ]

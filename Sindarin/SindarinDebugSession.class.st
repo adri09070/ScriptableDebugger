@@ -1,8 +1,3 @@
-"
-stepRecord: StepRecord
-
-StepRecords: LinkedList[StepRecord]
-"
 Class {
 	#name : #SindarinDebugSession,
 	#superclass : #Object,
@@ -15,25 +10,27 @@ Class {
 }
 
 { #category : #'instance creation' }
-SindarinDebugSession class >> newWithName: aString forProcess: aProcess [
+SindarinDebugSession class >> newWithName: arg1 forProcess: arg2 [
 
-	^ DebugSession new
-		  name: aString;
-		  process: aProcess context: aProcess suspendedContext;
-		  asSindarinDebugSession
+	| tmp2 |
+	tmp2 := DebugSession new.
+	tmp2
+		name: arg1;
+		process: arg2 context: arg2 suspendedContext.
+	^ tmp2 asSindarinDebugSession
 ]
 
 { #category : #initialization }
 SindarinDebugSession >> activateEventTriggering [
+
 	triggerEventOn := true.
-	self flag: 'Why not refreshing?'.
-	"self refreshAttachedDebugger."
+	self flag: 'Why not refreshing?'
 ]
 
 { #category : #converting }
 SindarinDebugSession >> asSindarinDebugSession [
 
-	^ self
+	
 ]
 
 { #category : #accessing }
@@ -43,9 +40,9 @@ SindarinDebugSession >> canBeTerminated [
 ]
 
 { #category : #accessing }
-SindarinDebugSession >> canBeTerminated: anObject [
+SindarinDebugSession >> canBeTerminated: arg1 [
 
-	canBeTerminated := anObject
+	canBeTerminated := arg1
 ]
 
 { #category : #initialization }
@@ -61,9 +58,9 @@ SindarinDebugSession >> debugSession [
 ]
 
 { #category : #accessing }
-SindarinDebugSession >> debugSession: anObject [
+SindarinDebugSession >> debugSession: arg1 [
 
-	debugSession := anObject
+	debugSession := arg1
 ]
 
 { #category : #initialization }
@@ -76,7 +73,6 @@ SindarinDebugSession >> initialize [
 
 { #category : #initialization }
 SindarinDebugSession >> refreshAttachedDebugger [
-	"The following lines are to force possible debuggers observing the same debug session to update themselves based"
 
 	self debugSession triggerEvent: #contextChanged
 ]
@@ -84,29 +80,29 @@ SindarinDebugSession >> refreshAttachedDebugger [
 { #category : #'debugging actions' }
 SindarinDebugSession >> resumeAndClear [
 
-	self debugSession
+	| tmp2 |
+	tmp2 := self debugSession.
+	tmp2
 		resume;
 		clear
 ]
 
 { #category : #'debugging actions' }
-SindarinDebugSession >> stepInto: aContext [
-	"Should not step more a process that is terminating, otherwise the image will get locked."
-	self flag: 'Why the image gets locked? Please investigate.'.
+SindarinDebugSession >> stepInto: arg1 [
 
-	self debugSession interruptedProcess isTerminating
-		ifTrue: [ SteppingATerminatingProcess signal ].
-	^ self debugSession stepInto: aContext
+	self flag: 'Why the image gets locked? Please investigate.'.
+	self debugSession interruptedProcess isTerminating ifTrue: [ 
+		SteppingATerminatingProcess signal ].
+	^ self debugSession stepInto: arg1
 ]
 
 { #category : #'debugging actions' }
-SindarinDebugSession >> stepOver: aContext [
-	"Should not step more a process that is terminating, otherwise the image will get locked."
+SindarinDebugSession >> stepOver: arg1 [
+
 	self flag: 'Why the image gets locked? Please investigate.'.
-	
-	self debugSession interruptedProcess isTerminating
-		ifTrue: [ SteppingATerminatingProcess signal ].
-	^ self debugSession stepOver: aContext
+	self debugSession interruptedProcess isTerminating ifTrue: [ 
+		SteppingATerminatingProcess signal ].
+	^ self debugSession stepOver: arg1
 ]
 
 { #category : #'debugging actions' }
@@ -116,8 +112,7 @@ SindarinDebugSession >> terminate [
 ]
 
 { #category : #'debugging actions' }
-SindarinDebugSession >> triggerEvent: anEventSelector [
+SindarinDebugSession >> triggerEvent: arg1 [
 
-	triggerEventOn ifTrue: [ 
-		^ self debugSession triggerEvent: anEventSelector ]
+	triggerEventOn ifTrue: [ ^ self debugSession triggerEvent: arg1 ]
 ]

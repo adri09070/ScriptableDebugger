@@ -1,6 +1,3 @@
-"
-I mock sindarin debug sessions to control it finely during tests
-"
 Class {
 	#name : #SindarinDebugSessionMock,
 	#superclass : #Object,
@@ -14,68 +11,78 @@ Class {
 
 { #category : #accessing }
 SindarinDebugSessionMock >> context [
-	 ^self
+
+	
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> debugSession [
-	 ^self
+
+	
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> interruptedContext [
-	 ^self
+
+	
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> isMessage [
-	 ^isMessage ifNil:[false]
+
+	^ isMessage ifNil: [ false ] ifNotNil: [ isMessage ]
 ]
 
 { #category : #accessing }
-SindarinDebugSessionMock >> isMessage: anObject [
+SindarinDebugSessionMock >> isMessage: arg1 [
 
-	isMessage := anObject
+	isMessage := arg1
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> method [
-	 ^self
+
+	
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> pc [
-	 ^self
+
+	
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> receiver [
-	 ^receiver
+
+	^ receiver
 ]
 
 { #category : #accessing }
-SindarinDebugSessionMock >> receiver: anObject [
+SindarinDebugSessionMock >> receiver: arg1 [
 
-	receiver := anObject
+	receiver := arg1
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> selector [
-	^selector 
+
+	^ selector
 ]
 
 { #category : #accessing }
-SindarinDebugSessionMock >> selector: anObject [
+SindarinDebugSessionMock >> selector: arg1 [
 
-	selector := anObject
+	selector := arg1
 ]
 
 { #category : #accessing }
 SindarinDebugSessionMock >> sourceNodeExecuted [
-	 ^self
+
+	
 ]
 
 { #category : #accessing }
-SindarinDebugSessionMock >> sourceNodeForPC: pc [
-	 ^self
+SindarinDebugSessionMock >> sourceNodeForPC: arg1 [
+
+	
 ]

@@ -10,8 +10,7 @@ Class {
 
 { #category : #running }
 SindarinDebugSessionTest >> setUp [
-	"Hooks that subclasses may override to define the fixture of test."
-	
+
 	super setUp.
 	debugSession := DebugSession new.
 	sindarinSession := debugSession asSindarinDebugSession
@@ -34,15 +33,14 @@ SindarinDebugSessionTest >> testSindarinSessionAsSindarinDebugSession [
 { #category : #tests }
 SindarinDebugSessionTest >> testSindarinSessionInstantiation [
 
-	| sessionName process |
-	sessionName := 'TestSDS'.
-	process := [  ] newProcess.
+	| tmp1 tmp2 |
+	tmp1 := 'TestSDS'.
+	tmp2 := [  ] newProcess.
 	sindarinSession := SindarinDebugSession
-		                   newWithName: sessionName
-		                   forProcess: process.
-	self assert: sindarinSession debugSession notNil.
-	self assert: sindarinSession debugSession name equals: sessionName.
+		                   newWithName: tmp1
+		                   forProcess: tmp2.
 	self
-		assert: sindarinSession debugSession process
-		identicalTo: process
+		assert: sindarinSession debugSession notNil;
+		assert: sindarinSession debugSession name equals: tmp1;
+		assert: sindarinSession debugSession process identicalTo: tmp2
 ]

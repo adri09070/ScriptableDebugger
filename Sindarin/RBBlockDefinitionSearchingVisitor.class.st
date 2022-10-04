@@ -9,17 +9,18 @@ Class {
 }
 
 { #category : #'instance creation' }
-RBBlockDefinitionSearchingVisitor class >> newToSearch: aBlockNode [
+RBBlockDefinitionSearchingVisitor class >> newToSearch: arg1 [
 
-	^ self new
-		  blockToSearch: aBlockNode;
-		  yourself
+	| tmp2 |
+	tmp2 := self new.
+	tmp2 blockToSearch: arg1.
+	^ tmp2 yourself
 ]
 
 { #category : #accessing }
-RBBlockDefinitionSearchingVisitor >> blockToSearch: aBlockNode [
+RBBlockDefinitionSearchingVisitor >> blockToSearch: arg1 [
 
-	blockToSearch := aBlockNode.
+	blockToSearch := arg1.
 	isBlockFound := false
 ]
 
@@ -36,9 +37,9 @@ RBBlockDefinitionSearchingVisitor >> isBlockFound [
 ]
 
 { #category : #visiting }
-RBBlockDefinitionSearchingVisitor >> visitNode: aNode [
+RBBlockDefinitionSearchingVisitor >> visitNode: arg1 [
 
-	super visitNode: aNode.
-	aNode = blockToSearch ifTrue: [ isBlockFound := true ].
-	^ isBlockFound 
+	super visitNode: arg1.
+	arg1 = blockToSearch ifTrue: [ isBlockFound := true ].
+	^ isBlockFound
 ]

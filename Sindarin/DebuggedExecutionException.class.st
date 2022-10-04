@@ -6,5 +6,6 @@ Class {
 
 { #category : #testing }
 DebuggedExecutionException >> isExceptionSignalledForDebuggedExecution [
+
 	^ true
 ]
