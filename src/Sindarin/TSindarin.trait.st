@@ -88,6 +88,12 @@ TSindarin >> context [
 	^ self debugSession interruptedContext
 ]
 
+{ #category : 'astAndAstMapping' }
+TSindarin >> currentASTScope [
+
+	^ (self context compiledCode sourceNodeForPC: self pc) scope
+]
+
 { #category : 'private' }
 TSindarin >> currentContextStackSize [
 
